@@ -13,11 +13,11 @@
 ActiveRecord::Schema.define(version: 20171221072213) do
 
   create_table "time_lines", force: :cascade do |t|
-    t.string "username"
-    t.string "tweettime"
-    t.string "tweettext"
-    t.string "favocount"
-    t.string "retwcount"
+    t.string "user_name", default: "unti", null: false
+    t.datetime "tweetd_time"
+    t.text "tweettext"
+    t.integer "favo_count"
+    t.integer "retw_count"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -10,13 +10,10 @@ require './slack'
 require './models'
 
 class TwitterGetTl
-	def initialize(to,sc)
+	def initialize(config)
 		## 何でこれ書いてるんだろう...多分無くても動く気はします ##
-		@rest = Twitter::REST::Client.new do |config|
-			config.consumer_key = ENV.fetch("TWITTER_API_KEY")
-			config.consumer_secret = ENV.fetch("TWITTER_API_SECRET")
-			config.access_token = to
-			config.access_token_secret = sc
+    @config = config
+    @rest = Twitter::REST::Client.new(@config)
 		end
 
 		def timeline
@@ -38,6 +35,7 @@ class TwitterGetTl
 			count = 20    # 一度に取得するツイート数. 最大値は 200.
 
 			for num in 1..50 do
+        # 50.times { |num| } <- おすすめ
 				xxx = 51 - num
 				tweets = @rest.user_timeline(id, {:count=>count, :page=> xxx})
 				puts xxx 
@@ -57,6 +55,11 @@ class TwitterGetTl
 	end
 end
 
-app = TwitterGetTl.new("920656133806686208-gi7Z0mxc0ylFA4txjCaZ95tMTQl8FQW","QkilmBgoUBqDRJHR0RiCOPG0JmBe6MKzQsGLip54jZBTX")
+app = TwitterGetTl.new(
+  consumer_key: ENV.fetch("TWITTER_API_KEY"),
+  consumer_secret: ENV.fetch("TWITTER_API_SECRET"),
+  access_token: "920656133806686208-gi7Z0mxc0ylFA4txjCaZ95tMTQl8FQW",
+  access_token_secret: "QkilmBgoUBqDRJHR0RiCOPG0JmBe6MKzQsGLip54jZBTX",
+)
 #app = TwitterGetTl.new("722779054651224068-na3hQwaWJqgIt1vPlgI9enDgJhJ5zCf","zMDRakBVBIVLlo48QNtmwZtHtTotvTq5ITCnzwaZoF2s0")
 app.test
