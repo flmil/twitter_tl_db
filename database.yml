@@ -1,4 +1,5 @@
 development:
-  adapter: postgresql
+  adapter: sqlite3
   database: db/development.db
+  pool: 5
 

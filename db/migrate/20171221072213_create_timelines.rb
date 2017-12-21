@@ -1,6 +1,6 @@
 class CreateTimelines < ActiveRecord::Migration[5.1]
 	def change
-		create_table :timelinetables do |t|
+		create_table :time_lines do |t|
 			t.string :username
 			t.string :tweettime
 			t.string :tweettext
