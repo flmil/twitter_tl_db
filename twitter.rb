@@ -7,6 +7,7 @@ require 'json'
 require 'net/http'
 
 require './slack'
+require './models'
 
 class TwitterGetTl
 	def initialize(to,sc)
